@@ -1,0 +1,65 @@
+# DA-OCL 调试配置（小规模、快速迭代）
+
+model:
+  obs_dim: 128
+  entity_dim: 128
+  gnn_hidden_dim: 256
+  ssm_state_dim: 512
+  rule_dim: 256
+  action_dim: 8
+  window_size: 5
+  use_mamba: false   # 调试时不使用 mamba，降级到 PyTorch 实现
+
+memory:
+  fast_memory_capacity: 500
+  slow_memory_lr: 0.001
+  use_mamba: false
+
+buffer:
+  total_capacity: 1000
+  protected_ratio: 0.10
+  diversity_ratio_initial: 0.40
+  diversity_ratio_mature: 0.20
+  task_ratio_initial: 0.50
+  task_ratio_mature: 0.70
+
+regulation:
+  alpha_importance: 0.7
+  surprise_sigma: 1.0
+  lambda_decay: 0.01
+  death_r_penalty_threshold: 8.0
+  death_causal_chain_T: 5
+  death_priority_gamma: 0.9
+
+night:
+  window_threshold: 50
+  mask_density_threshold: 0.3
+  surp_threshold: 2.0
+  timestep_fallback: 500
+  beta0_kl: 1.0
+  gamma_dream: 0.1
+  ewc_lambda: 5000.0
+
+filter:
+  coarse_threshold: 0.5
+  fine_threshold: 0.7
+  skip_fine_if_coarse_above: 0.5
+
+boundary:
+  n_sigma: 2.0
+  history_size: 20
+
+env:
+  name: dummy
+  num_entities: 4
+  obs_dim: 128
+  action_dim: 8
+  max_episode_steps: 200
+
+train:
+  num_steps: 5000
+  device: cpu
+  seed: 42
+  log_interval: 50
+  save_interval: 1000
+  checkpoint_dir: checkpoints_debug

@@ -1,0 +1,6 @@
+pytest>=7.3.0
+ruff>=0.1.0
+mypy>=1.4.0
+matplotlib>=3.7.0
+scipy>=1.10.0
+wandb>=0.15.0
